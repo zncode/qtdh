@@ -9,7 +9,6 @@ use Think\Controller;
 class CheckcodeController extends Controller {
 
     public function index() {
-    	
     	$length=4;
     	if (isset($_GET['length']) && intval($_GET['length'])>2){
     		$length = intval($_GET['length']);
@@ -72,6 +71,7 @@ class CheckcodeController extends Controller {
 	        'reset'     =>  true,           // 验证成功后是否重置
     	);
     	$Verify = new \Think\Verify($config);
+
     	$Verify->entry();
     }
     
