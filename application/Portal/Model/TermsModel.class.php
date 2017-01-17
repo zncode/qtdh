@@ -50,5 +50,13 @@ class TermsModel extends CommonModel {
 		parent::_before_write($data);
 	}
 	
-
+	public function getTermId($name){
+		$term = $this->where("name='{$name}'")->find();
+		if($term)
+		{
+			return $term['term_id'];
+		}else{
+			return false;
+		}
+	}
 }
