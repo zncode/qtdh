@@ -35,9 +35,8 @@ class IndexController extends HomebaseController {
     //首页
 	public function index() {
 		$model = M('Posts');
-		//新闻 term_id=4
-		$news = $model->alias('p')->join('cmf_term_relationships as t ON p.id = t.object_id', 'LEFT')->where('p.recommended=1')->where('t.term_id=4')->order('p.id')->limit(10)->select();
-
+		//新闻 term_id=4,5
+		$news = $model->alias('p')->join('cmf_term_relationships as t ON p.id = t.object_id', 'LEFT')->where('p.recommended=1')->where('t.term_id IN (4,5)')->order('p.id')->limit(10)->select();
 
 		$this->assign('news', $news);
     	$this->display(":index");
