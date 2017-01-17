@@ -24,4 +24,29 @@ class PostsModel extends CommonModel {
 	protected function _before_write(&$data) {
 		parent::_before_write($data);
 	}
+
+	public function getPosts($tid){
+		$news = sp_sql_posts_bycatid($termId,'order: posts.id desc,10',array('recommended'=>1));
+		if($news){
+			foreach($news as $key => $new){
+				$smeta = json_decode($new['smeta']);
+				$photos = $smeta->photo;
+				
+				if($photos){
+					foreach($photos as $k => $photo){
+						$photo->url = sp_get_file_download_url($photo->url);
+						$photos[$k] = $photo;
+					}
+				}else{
+					$photos = false;
+				}
+				$news[$key]['thumb'] = sp_get_file_download_url($smeta->thumb);
+				$news[$key]['photo'] = $photos;	
+			}
+			
+			return $news;
+		}else{
+			return false;
+		}
+	}
 }

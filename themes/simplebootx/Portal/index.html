@@ -46,7 +46,7 @@
 			 <h2 class="font-large nospace"><i class="fa fa-align-center"></i> 新闻</h2>
              <ul class="list-inline">
 	          	<foreach name="news" item="value" key="key"> 
-					<li> <a href="{$value.post_source}" target="_blank">{$value.post_title}</a></li>
+					<li><img src="{$value.thumb}"> <a href="{$value.post_source}" target="_blank">{$value.post_title}</a></li>
 				</foreach>
 			</ul>
 		</div>

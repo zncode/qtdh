@@ -35,11 +35,11 @@ class IndexController extends HomebaseController {
     //首页
 	public function index() {
 		$modelTerms = D('Terms');
-		$termId = $modelTerms->getTermID('新闻');
+		$modelPosts = D('Posts');
 
 		//新闻
-		$news = sp_sql_posts_bycatid($termId,'order: posts.id desc,10',array('recommended'=>1));
-		//$news = $model->alias('p')->join('cmf_term_relationships as t ON p.id = t.object_id', 'LEFT')->where('p.recommended=1')->where('t.term_id IN (4,5)')->order('p.id')->limit(10)->select();
+		$newsTermId = $modelTerms->getTermID('新闻');
+		$news 		= $modelPosts->getPosts($termId);
 
 		$this->assign('news', $news);
     	$this->display(":index");
